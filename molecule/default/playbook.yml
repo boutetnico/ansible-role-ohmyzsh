@@ -29,7 +29,7 @@
       oh_my_zsh_plugins:
         - test_plugin1
         - test_plugin2
-      users:
+      oh_my_zsh_users:
         - username: test_usr1
         - username: test_usr2
           oh_my_zsh:

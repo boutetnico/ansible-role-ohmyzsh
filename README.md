@@ -66,7 +66,7 @@ oh_my_zsh_plugins:
 
 # User configuration
 # Important: oh-my-zsh is installed per user so you need to specify the users to install it for.
-users:
+oh_my_zsh_users:
   - username: example1
     oh_my_zsh:
       theme: robbyrussell
@@ -87,7 +87,7 @@ Example Playbook
 - hosts: servers
   roles:
     - role: gantsign.oh-my-zsh
-      users:
+      oh_my_zsh_users:
         - username: example
 ```
 

@@ -5,3 +5,18 @@ oh_my_zsh_theme: robbyrussell
 # Default plugins
 oh_my_zsh_plugins:
   - git
+
+# User configuration
+# Important: oh-my-zsh is installed per user so you need to specify the users to install it for.
+oh_my_zsh_users: []
+  # - username: example1
+  #   oh_my_zsh:
+  #     theme: robbyrussell
+  #     plugins:
+  #       - git
+  # - username: example2
+  #   oh_my_zsh:
+  #     theme: robbyrussell
+  #     plugins:
+  #       - git
+  #       - mvn

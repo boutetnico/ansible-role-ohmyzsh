@@ -20,7 +20,7 @@
   args:
     chdir: '~{{ item.username }}'
     creates: '~{{ item.username }}/.oh-my-zsh'
-  with_items: '{{ users }}'
+  with_items: '{{ oh_my_zsh_users }}'
 
 - name: set permissions of oh-my-zsh for users
   become: yes
@@ -31,14 +31,14 @@
     # for users with insecure umasks (e.g., "002", allowing group writability).
     mode: 'go-w'
     recurse: yes
-  with_items: '{{ users }}'
+  with_items: '{{ oh_my_zsh_users }}'
 
 - name: set default shell for users
   become: yes
   user:
     name: '{{ item.username }}'
     shell: /bin/zsh
-  with_items: '{{ users }}'
+  with_items: '{{ oh_my_zsh_users }}'
 
 - name: write .zshrc for users
   become: yes
@@ -48,4 +48,4 @@
     dest: '~{{ item.username }}/.zshrc'
     backup: yes
     mode: 'u=rw,go=r'
-  with_items: '{{ users }}'
+  with_items: '{{ oh_my_zsh_users }}'
