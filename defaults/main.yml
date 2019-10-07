@@ -9,14 +9,20 @@ oh_my_zsh_plugins:
 # User configuration
 # Important: oh-my-zsh is installed per user so you need to specify the users to install it for.
 oh_my_zsh_users: []
-  # - username: example1
-  #   oh_my_zsh:
-  #     theme: robbyrussell
-  #     plugins:
-  #       - git
-  # - username: example2
-  #   oh_my_zsh:
-  #     theme: robbyrussell
-  #     plugins:
-  #       - git
-  #       - mvn
+# - username: example1
+#   oh_my_zsh:
+#     theme: robbyrussell
+#     plugins:
+#       - git
+# - username: example2
+#   oh_my_zsh:
+#     theme: robbyrussell
+#     plugins:
+#       - git
+#       - mvn
+#     alias:
+#       - 'la="ls -al"'
+
+# Alias
+oh_my_zsh_alias: []
+# - 'l="ls -l"'

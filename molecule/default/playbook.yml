@@ -37,3 +37,7 @@
             plugins:
               - test_plugin3
               - test_plugin4
+            alias:
+              - test_alias1
+      oh_my_zsh_alias:
+        - test_alias2

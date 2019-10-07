@@ -101,3 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+{% for alias in oh_my_zsh.alias | default(oh_my_zsh_alias) %}
+alias {{ alias }}
+{% endfor %}
