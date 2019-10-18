@@ -1,19 +1,16 @@
-# EditorConfig: http://EditorConfig.org
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs
+# editorconfig.org
 
-# top-most EditorConfig file
 root = true
 
-# Defaults for all editor files
 [*]
-insert_final_newline = true
-indent_style = space
-indent_size = 4
-trim_trailing_whitespace = true
-
-# Files with a smaller indent
-[*.yml]
+# Change these settings to your own preference
 indent_size = 2
+indent_style = space
 
-# Jinja2 template files
-[*.j2]
+# We recommend you to keep these unchanged
+charset = utf-8
 end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true

@@ -1,140 +1,73 @@
-Ansible Role: Oh My Zsh
-=======================
+ansible-role-oh-my-zsh
+======================
 
-[![Build Status](https://travis-ci.org/gantsign/ansible-role-oh-my-zsh.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-oh-my-zsh)
-[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.oh--my--zsh-blue.svg)](https://galaxy.ansible.com/gantsign/oh-my-zsh)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible-role-oh-my-zsh/master/LICENSE)
+This role configures oh-my-zsh.
 
-Role to download, install and configure [Oh-My-Zsh](http://ohmyz.sh/).
-
-**Note:** you may be better off using the alternative
-[gantsign.ansible_role_antigen](https://galaxy.ansible.com/gantsign/antigen)
-role that can install third-party Zsh plugins as well as installing Oh My Zsh
-and its plugins.
+[![Build Status](https://travis-ci.org/boutetnico/ansible-role-oh-my-zsh.svg?branch=master)](https://travis-ci.org/boutetnico/ansible-role-oh-my-zsh)
 
 Requirements
 ------------
 
-* Ansible >= 2.6
+Ansible 2.6 or newer.
 
-* Linux Distribution
+Supported Platforms
+-------------------
+- [Debian - 9 (Stretch)](https://wiki.debian.org/DebianStretch)
+- [Debian - 10 (Buster)](https://wiki.debian.org/DebianBuster)
+- [Ubuntu - 16.04 (Xenial Xerus)](http://releases.ubuntu.com/16.04/)
+- [Ubuntu - 18.04 (Bionic Beaver)](http://releases.ubuntu.com/18.04/)
 
-    * Debian Family
-
-        * Debian
-
-            * Jessie (8)
-            * Stretch (9)
-
-        * Ubuntu
-
-            * Trusty (14.04)
-            * Xenial (16.04)
-            * Bionic (18.04)
-
-    * RedHat Family
-
-        * CentOS
-
-            * 7
-
-        * Fedora
-
-            * 28
-
-    * SUSE Family
-
-        * openSUSE
-
-            * 15.0
-
-    * Note: other versions are likely to work but have not been tested.
 
 Role Variables
 --------------
 
-The following variables will change the behavior of this role (default values
-are shown below):
+| Variable                     | Required | Default        | Choices   | Comments                                    |
+|------------------------------|----------|--------------- |-----------|---------------------------------------------|
+| oh_my_zsh_theme              | yes      | `robbyrussell` | string    | Default theme                               |
+| oh_my_zsh_custom_themes      | no       |                | string    | Local path to themes files to install       |
+| oh_my_zsh_plugins            | yes      | `[git]`        | list      | Default plugins                             |
+| oh_my_zsh_users              | yes      | `[]`           | list      | Users to configure. See `defaults/main.yml` |
+| oh_my_zsh_alias              | yes      | `[]`           | list      | Default alias                               |
 
-```yaml
-# Default theme
-oh_my_zsh_theme: robbyrussell
+Dependencies
+------------
 
-# Define path to custom themes to install if needed
-# oh_my_zsh_custom_themes: path/to/*.zsh-theme
-
-# Default plugins
-oh_my_zsh_plugins:
-  - git
-
-# User configuration
-# Important: oh-my-zsh is installed per user so you need to specify the users to install it for.
-oh_my_zsh_users: []
-# - username: example1
-#   oh_my_zsh:
-#     theme: robbyrussell
-#     plugins:
-#       - git
-# - username: example2
-#   oh_my_zsh:
-#     theme: robbyrussell
-#     plugins:
-#       - git
-#       - mvn
-#     alias:
-#       - 'la="ls -al"'
-
-# Alias
-oh_my_zsh_alias: []
-# - 'l="ls -l"'
-```
+None
 
 Example Playbook
 ----------------
 
-```yaml
-- hosts: servers
-  roles:
-    - role: gantsign.oh-my-zsh
-      oh_my_zsh_users:
-        - username: example
-```
+    - hosts: all
+      roles:
+        - ansible-role-oh-my-zsh
+          oh_my_zsh_theme: bira
+          oh_my_zsh_custom_themes: files/oh-my-zsh/themes/*.zsh-theme
+          oh_my_zsh_plugins:
+            - git
+            - ansible
+          oh_my_zsh_users:
+            - username: admin
+            - username: root
+              oh_my_zsh:
+                theme: simple
+                plugins:
+                  - composer
+                  - aws
+                alias:
+                  - 'cu="composer update"'
+          oh_my_zsh_alias:
+            - 'du="docker-compose up"'
 
-More Roles From GantSign
-------------------------
+Testing
+-------
 
-You can find more roles from GantSign on
-[Ansible Galaxy](https://galaxy.ansible.com/gantsign).
+## Debian
 
-Development & Testing
----------------------
+`molecule --base-config molecule/shared/base.yml test --scenario-name debian`
 
-This project uses [Molecule](http://molecule.readthedocs.io/) to aid in the
-development and testing; the role is unit tested using
-[Testinfra](http://testinfra.readthedocs.io/) and
-[pytest](http://docs.pytest.org/).
+## Ubuntu
 
-To develop or test you'll need to have installed the following:
-
-* Linux (e.g. [Ubuntu](http://www.ubuntu.com/))
-* [Docker](https://www.docker.com/)
-* [Python](https://www.python.org/) (including python-pip)
-* [Ansible](https://www.ansible.com/)
-* [Molecule](http://molecule.readthedocs.io/)
-
-Because the above can be tricky to install, this project includes
-[Molecule Wrapper](https://github.com/gantsign/molecule-wrapper). Molecule
-Wrapper is a shell script that installs Molecule and it's dependencies (apart
-from Linux) and then executes Molecule with the command you pass it.
-
-To test this role using Molecule Wrapper run the following command from the
-project root:
-
-```bash
-./moleculew test
-```
-
-Note: some of the dependencies need `sudo` permission to install.
+`molecule --base-config molecule/shared/base.yml test --scenario-name ubuntu`
 
 License
 -------
@@ -144,7 +77,4 @@ MIT
 Author Information
 ------------------
 
-John Freeman
-
-GantSign Ltd.
-Company No. 06109112 (registered in England)
+Forked from original work of `John Freeman` modified by [@boutetnico](https://github.com/boutetnico).
