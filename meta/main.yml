@@ -15,6 +15,5 @@ galaxy_info:
         - buster
   galaxy_tags:
     - shell
-    - oh-my-zsh
     - zsh
 dependencies: []
