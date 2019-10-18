@@ -60,24 +60,33 @@ are shown below):
 # Default theme
 oh_my_zsh_theme: robbyrussell
 
+# Define path to custom themes to install if needed
+# oh_my_zsh_custom_themes: path/to/*.zsh-theme
+
 # Default plugins
 oh_my_zsh_plugins:
   - git
 
 # User configuration
 # Important: oh-my-zsh is installed per user so you need to specify the users to install it for.
-oh_my_zsh_users:
-  - username: example1
-    oh_my_zsh:
-      theme: robbyrussell
-      plugins:
-        - git
-  - username: example2
-    oh_my_zsh:
-      theme: robbyrussell
-      plugins:
-        - git
-        - mvn
+oh_my_zsh_users: []
+# - username: example1
+#   oh_my_zsh:
+#     theme: robbyrussell
+#     plugins:
+#       - git
+# - username: example2
+#   oh_my_zsh:
+#     theme: robbyrussell
+#     plugins:
+#       - git
+#       - mvn
+#     alias:
+#       - 'la="ls -al"'
+
+# Alias
+oh_my_zsh_alias: []
+# - 'l="ls -l"'
 ```
 
 Example Playbook

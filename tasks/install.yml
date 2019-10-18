@@ -49,3 +49,14 @@
     backup: yes
     mode: 'u=rw,go=r'
   with_items: '{{ oh_my_zsh_users }}'
+
+- name: install custom themes
+  become: yes
+  become_user: '{{ item.0.username }}'
+  template:
+    src: "{{ item.1 }}"
+    dest: '~{{ item.0.username }}/.oh-my-zsh/custom/themes'
+  with_nested:
+    - '{{ oh_my_zsh_users }}'
+    - '{{ lookup("fileglob", oh_my_zsh_custom_themes) }}'
+  when: oh_my_zsh_custom_themes is defined

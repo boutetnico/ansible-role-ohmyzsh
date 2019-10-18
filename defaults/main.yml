@@ -2,6 +2,9 @@
 # Default theme
 oh_my_zsh_theme: robbyrussell
 
+# Define path to custom themes to install if needed
+# oh_my_zsh_custom_themes: path/to/*.zsh-theme
+
 # Default plugins
 oh_my_zsh_plugins:
   - git

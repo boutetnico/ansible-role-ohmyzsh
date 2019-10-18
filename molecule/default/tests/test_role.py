@@ -44,3 +44,15 @@ def test_console_setup(host):
         assert setup.user == 'root'
         assert setup.group == 'root'
         assert setup.contains('CHARMAP="UTF-8"')
+
+
+@pytest.mark.parametrize('username,theme', [
+    ('test_usr1', 'custom.zsh-theme'),
+])
+def test_oh_my_zsh_custom_theme(host, username, theme):
+    theme = host.file('/home/' + username +
+                      '/.oh-my-zsh/custom/themes/' + theme)
+    assert theme.exists
+    assert theme.is_file
+    assert theme.user == username
+    assert theme.group in [username, 'users']
