@@ -18,7 +18,7 @@ oh_my_zsh_users: []
 #     plugins:
 #       - git
 #     extra_config:
-#       - export TOKEN=S3CR3T
+#       - "export TOKEN=S3CR3T"
 # - username: example2
 #   oh_my_zsh:
 #     theme: robbyrussell
@@ -34,4 +34,4 @@ oh_my_zsh_alias: []
 
 # Extra config lines
 oh_my_zsh_extra_lines: []
-# - git config --global oh-my-zsh.hide-status 1
+# - "git config --global oh-my-zsh.hide-status 1"
