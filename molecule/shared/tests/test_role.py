@@ -21,8 +21,19 @@ def test_oh_my_zsh_install(host, username):
 
 
 @pytest.mark.parametrize('username,theme,plugins,alias,extra', [
-    ('test_usr1', 'test_theme1', 'test_plugin1 test_plugin2', 'test_alias2', 'test_line1'),
-    ('test_usr2', 'test_theme2', 'test_plugin3 test_plugin4', 'test_alias1', 'test_line2'),
+    (
+      'test_usr1',
+      'test_theme1',
+      'test_plugin1 test_plugin2',
+      'test_alias2', 'test_line1'
+    ),
+    (
+      'test_usr2',
+      'test_theme2',
+      'test_plugin3 test_plugin4',
+      'test_alias1',
+      'test_line2'
+    ),
 ])
 def test_oh_my_zsh_config(host, username, theme, plugins, alias, extra):
     zshrc = host.file('/home/' + username + '/.zshrc')
