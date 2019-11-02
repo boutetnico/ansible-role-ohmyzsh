@@ -40,5 +40,9 @@
               - test_plugin4
             alias:
               - test_alias1
+            extra_config:
+              - test_line1
       oh_my_zsh_alias:
         - test_alias2
+      oh_my_zsh_extra_lines:
+        - test_line2

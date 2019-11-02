@@ -28,6 +28,7 @@ Role Variables
 | oh_my_zsh_plugins            | yes      | `[git]`        | list      | Default plugins                             |
 | oh_my_zsh_users              | yes      | `[]`           | list      | Users to configure. See `defaults/main.yml` |
 | oh_my_zsh_alias              | yes      | `[]`           | list      | Default alias                               |
+| oh_my_zsh_extra_lines        | yes      | `[]`           | list      | Extra config lines in `.zshrc`              |
 
 Dependencies
 ------------
@@ -55,8 +56,12 @@ Example Playbook
                   - aws
                 alias:
                   - 'cu="composer update"'
+                extra_config:
+                  - "export TOKEN=S3CR3T"
           oh_my_zsh_alias:
             - 'du="docker-compose up"'
+          oh_my_zsh_extra_lines:
+            - "git config --global oh-my-zsh.hide-status 1"
 
 Testing
 -------

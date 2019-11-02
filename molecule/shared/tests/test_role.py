@@ -20,11 +20,23 @@ def test_oh_my_zsh_install(host, username):
     assert oh_my_zsh.group in [username, 'users']
 
 
-@pytest.mark.parametrize('username,theme,plugins,alias', [
-    ('test_usr1', 'test_theme1', 'test_plugin1 test_plugin2', 'test_alias2'),
-    ('test_usr2', 'test_theme2', 'test_plugin3 test_plugin4', 'test_alias1'),
+@pytest.mark.parametrize('username,theme,plugins,alias,extra', [
+    (
+      'test_usr1',
+      'test_theme1',
+      'test_plugin1 test_plugin2',
+      'test_alias2',
+      'test_line2',
+    ),
+    (
+      'test_usr2',
+      'test_theme2',
+      'test_plugin3 test_plugin4',
+      'test_alias1',
+      'test_line1',
+    ),
 ])
-def test_oh_my_zsh_config(host, username, theme, plugins, alias):
+def test_oh_my_zsh_config(host, username, theme, plugins, alias, extra):
     zshrc = host.file('/home/' + username + '/.zshrc')
     assert zshrc.exists
     assert zshrc.is_file
@@ -33,6 +45,7 @@ def test_oh_my_zsh_config(host, username, theme, plugins, alias):
     assert zshrc.contains(theme)
     assert zshrc.contains(plugins)
     assert zshrc.contains(alias)
+    assert zshrc.contains(extra)
 
 
 def test_console_setup(host):
