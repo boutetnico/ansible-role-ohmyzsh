@@ -2,27 +2,6 @@
 - name: Converge
   hosts: all
 
-  pre_tasks:
-    - name: create test users
-      become: yes
-      user:
-        name: '{{ item }}'
-        home: '/home/{{ item }}'
-        createhome: yes
-      with_items:
-        - test_usr1
-        - test_usr2
-
-    - name: install console-setup file
-      become: yes
-      copy:
-        src: tests/console-setup.sh
-        dest: /etc/default/console-setup
-        force: no
-        owner: root
-        group: root
-        mode: 'u=rwx,go=r'
-
   roles:
     - role: ansible-role-oh-my-zsh
       oh_my_zsh_theme: test_theme1
