@@ -58,5 +58,5 @@
     dest: '~{{ item.0.username }}/.oh-my-zsh/custom/themes'
   with_nested:
     - '{{ oh_my_zsh_users }}'
-    - '{{ lookup("fileglob", oh_my_zsh_custom_themes) }}'
+    - '{{ lookup("fileglob", oh_my_zsh_custom_themes | d("")) }}'
   when: oh_my_zsh_custom_themes is defined
