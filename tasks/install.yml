@@ -1,12 +1,12 @@
 ---
 - name: install dependencies
   become: yes
-  package:
-    name: '{{ item }}'
+  apt:
+    name:
+      - git
+      - zsh
     state: present
-  with_items:
-    - git
-    - zsh
+    update_cache: true
 
 - name: clone oh-my-zsh for users
   tags:
