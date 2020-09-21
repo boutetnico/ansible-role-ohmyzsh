@@ -56,6 +56,7 @@
   template:
     src: "{{ item.1 }}"
     dest: '~{{ item.0.username }}/.oh-my-zsh/custom/themes'
+    mode: 0644
   with_nested:
     - '{{ oh_my_zsh_users }}'
     - '{{ lookup("fileglob", oh_my_zsh_custom_themes | d("")) }}'
