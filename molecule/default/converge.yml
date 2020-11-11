@@ -3,7 +3,7 @@
   hosts: all
 
   roles:
-    - role: ansible-role-oh-my-zsh
+    - role: ansible-role-ohmyzsh
       oh_my_zsh_theme: test_theme1
       oh_my_zsh_custom_themes: tests/themes/*.zsh-theme
       oh_my_zsh_plugins:

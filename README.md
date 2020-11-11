@@ -1,12 +1,15 @@
-ansible-role-oh-my-zsh
-======================
+[![tests](https://github.com/boutetnico/ansible-role-ohmyzsh/workflows/Test%20ansible%20role/badge.svg)](https://github.com/boutetnico/ansible-role-ohmyzsh/actions?query=workflow%3A%22Test+ansible+role%22)
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-boutetnico.ohmyzsh-blue.svg)](https://galaxy.ansible.com/boutetnico/ohmyzsh)
 
-This role configures oh-my-zsh.
+ansible-role-ohmyzsh
+====================
+
+This role installs and configures [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh).
 
 Requirements
 ------------
 
-Ansible 2.6 or newer.
+Ansible 2.7 or newer.
 
 Supported Platforms
 -------------------
@@ -19,14 +22,14 @@ Supported Platforms
 Role Variables
 --------------
 
-| Variable                     | Required | Default        | Choices   | Comments                                    |
-|------------------------------|----------|--------------- |-----------|---------------------------------------------|
-| oh_my_zsh_theme              | yes      | `robbyrussell` | string    | Default theme                               |
-| oh_my_zsh_custom_themes      | no       |                | string    | Local path to themes files to install       |
-| oh_my_zsh_plugins            | yes      | `[git]`        | list      | Default plugins                             |
-| oh_my_zsh_users              | yes      | `[]`           | list      | Users to configure. See `defaults/main.yml` |
-| oh_my_zsh_alias              | yes      | `[]`           | list      | Default alias                               |
-| oh_my_zsh_extra_lines        | yes      | `[]`           | list      | Extra config lines in `.zshrc`              |
+| Variable                     | Required | Default        | Choices   | Comments                                     |
+|------------------------------|----------|--------------- |-----------|----------------------------------------------|
+| oh_my_zsh_theme              | yes      | `robbyrussell` | string    | Default theme.                               |
+| oh_my_zsh_custom_themes      | no       |                | string    | Local path to themes files to install.       |
+| oh_my_zsh_plugins            | yes      | `[git]`        | list      | Default plugins.                             |
+| oh_my_zsh_users              | yes      | `[]`           | list      | Users to configure. See `defaults/main.yml`. |
+| oh_my_zsh_alias              | yes      | `[]`           | list      | Default alias.                               |
+| oh_my_zsh_extra_lines        | yes      | `[]`           | list      | Extra config lines in `.zshrc`.              |
 
 Dependencies
 ------------
@@ -38,7 +41,7 @@ Example Playbook
 
     - hosts: all
       roles:
-        - ansible-role-oh-my-zsh
+        - ansible-role-ohmyzsh
           oh_my_zsh_theme: bira
           oh_my_zsh_custom_themes: files/oh-my-zsh/themes/*.zsh-theme
           oh_my_zsh_plugins:
