@@ -7,13 +7,13 @@ driver:
   name: docker
 
 platforms:
-  - name: ansible-role-oh-my-zsh-debian-9
+  - name: ansible-role-ohmyzsh-debian-9
     image: debian:9
-  - name: ansible-role-oh-my-zsh-debian-10
+  - name: ansible-role-ohmyzsh-debian-10
     image: debian:10
-  - name: ansible-role-oh-my-zsh-ubuntu-1804
+  - name: ansible-role-ohmyzsh-ubuntu-1804
     image: ubuntu:18.04
-  - name: ansible-role-oh-my-zsh-ubuntu-2004
+  - name: ansible-role-ohmyzsh-ubuntu-2004
     image: ubuntu:20.04
 
 lint: |
