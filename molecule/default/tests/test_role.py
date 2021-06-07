@@ -60,7 +60,7 @@ def test_console_setup(host):
 
 
 @pytest.mark.parametrize('username,theme', [
-    ('test_usr1', 'custom.zsh-theme'),
+    ('test_usr1', 'test_theme1.zsh-theme'),
 ])
 def test_oh_my_zsh_custom_theme(host, username, theme):
     theme = host.file('/home/' + username +
