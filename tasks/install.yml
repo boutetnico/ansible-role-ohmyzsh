@@ -8,13 +8,14 @@
     update_cache: true
   become: true
 
-- name: Clone oh-my-zsh for users
+- name: Clone oh-my-zsh for users  # noqa latest[git]
   ansible.builtin.git:
     clone: true
     depth: 1
     dest: "~{{ item.username }}/.oh-my-zsh"
     repo: https://github.com/robbyrussell/oh-my-zsh.git
     single_branch: true
+    update: false
   loop: "{{ oh_my_zsh_users }}"
   loop_control:
     label: "{{ item.username }}"
