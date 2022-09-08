@@ -3,22 +3,22 @@
   hosts: all
 
   tasks:
-    - name: create test users
-      become: yes
-      user:
-        name: '{{ item }}'
+    - name: Create test users
+      ansible.builtin.user:
+        createhome: true
         home: '/home/{{ item }}'
-        createhome: yes
-      with_items:
+        name: '{{ item }}'
+      loop:
         - test_usr1
         - test_usr2
+      become: true
 
-    - name: install console-setup file
-      become: yes
-      copy:
-        src: tests/console-setup.sh
+    - name: Install console-setup file
+      ansible.builtin.copy:
         dest: /etc/default/console-setup
-        force: no
-        owner: root
+        force: false
         group: root
         mode: 'u=rwx,go=r'
+        owner: root
+        src: tests/console-setup.sh
+      become: true
