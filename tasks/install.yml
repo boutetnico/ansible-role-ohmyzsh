@@ -1,63 +1,65 @@
 ---
-- name: install dependencies
-  become: yes
-  apt:
+- name: Install dependencies
+  ansible.builtin.apt:
     name:
       - git
       - zsh
     state: present
     update_cache: true
+  become: true
 
-- name: clone oh-my-zsh for users
-  tags:
-    # Suppress warning: [ANSIBLE0006] git used in place of git module
-    # Git module doesn't allow us to set `core.autocrlf=input`.
-    - skip_ansible_lint
-  become: yes
-  become_user: '{{ item.username }}'
-  # core.autocrlf=input prevents https://github.com/robbyrussell/oh-my-zsh/issues/4402
-  command: 'git clone -c core.autocrlf=input --depth=1 https://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh'
-  args:
-    chdir: '~{{ item.username }}'
-    creates: '~{{ item.username }}/.oh-my-zsh'
-  with_items: '{{ oh_my_zsh_users }}'
+- name: Clone oh-my-zsh for users
+  ansible.builtin.git:
+    clone: true
+    depth: 1
+    dest: "~{{ item.username }}/.oh-my-zsh"
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    single_branch: true
+  loop: "{{ oh_my_zsh_users }}"
+  loop_control:
+    label: "{{ item.username }}"
+  become: true
+  become_user: "{{ item.username }}"
 
-- name: set permissions of oh-my-zsh for users
-  become: yes
-  file:
-    path: '~{{ item.username }}/.oh-my-zsh'
-    # Prevent the cloned repository from having insecure permissions. Failing to do
-    # so causes compinit() calls to fail with "command not found: compdef" errors
-    # for users with insecure umasks (e.g., "002", allowing group writability).
-    mode: 'go-w'
-    recurse: yes
-  with_items: '{{ oh_my_zsh_users }}'
+- name: Set permissions of oh-my-zsh for users
+  ansible.builtin.file:
+    path: "~{{ item.username }}/.oh-my-zsh"
+    mode: "go-w"
+    recurse: true
+  loop: "{{ oh_my_zsh_users }}"
+  loop_control:
+    label: "{{ item.username }}"
+  become: true
 
-- name: set default shell for users
-  become: yes
-  user:
-    name: '{{ item.username }}'
+- name: Set default shell for users
+  ansible.builtin.user:
+    name: "{{ item.username }}"
     shell: /bin/zsh
-  with_items: '{{ oh_my_zsh_users }}'
+  loop: "{{ oh_my_zsh_users }}"
+  loop_control:
+    label: "{{ item.username }}"
+  become: true
 
-- name: write .zshrc for users
-  become: yes
-  become_user: '{{ item.username }}'
-  template:
+- name: Write .zshrc for users
+  ansible.builtin.template:
     src: zshrc.j2
-    dest: '~{{ item.username }}/.zshrc'
-    backup: yes
-    mode: 'u=rw,go=r'
-  with_items: '{{ oh_my_zsh_users }}'
+    dest: "~{{ item.username }}/.zshrc"
+    backup: true
+    mode: "u=rw,go=r"
+  loop: "{{ oh_my_zsh_users }}"
+  loop_control:
+    label: "{{ item.username }}"
+  become: true
+  become_user: "{{ item.username }}"
 
-- name: install custom themes
-  become: yes
-  become_user: '{{ item.0.username }}'
-  template:
+- name: Install custom themes
+  ansible.builtin.template:
     src: "{{ item.1 }}"
-    dest: '~{{ item.0.username }}/.oh-my-zsh/custom/themes'
+    dest: "~{{ item.0.username }}/.oh-my-zsh/custom/themes"
     mode: 0644
   with_nested:
-    - '{{ oh_my_zsh_users }}'
-    - '{{ lookup("fileglob", oh_my_zsh_custom_themes | d(""), wantlist=True) }}'
+    - "{{ oh_my_zsh_users }}"
+    - "{{ lookup('fileglob', oh_my_zsh_custom_themes | d(''), wantlist=True) }}"
   when: oh_my_zsh_custom_themes is defined
+  become: true
+  become_user: "{{ item.0.username }}"
