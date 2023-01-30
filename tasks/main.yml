@@ -1,5 +1,6 @@
 ---
-- import_tasks: install.yml
+- name: Import install tasks
+  ansible.builtin.import_tasks: install.yml
 
 - name: Console setup for Debian family distributions
   ansible.builtin.include_tasks: debian-console-setup.yml
