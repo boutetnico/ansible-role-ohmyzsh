@@ -5,7 +5,7 @@
   tasks:
     - name: Create test users
       ansible.builtin.user:
-        createhome: true
+        create_home: true
         home: '/home/{{ item }}'
         name: '{{ item }}'
       loop:
