@@ -58,9 +58,7 @@
     src: "{{ item.1 }}"
     dest: "~{{ item.0.username }}/.oh-my-zsh/custom/themes"
     mode: "0644"
-  with_nested:
-    - "{{ oh_my_zsh_users }}"
-    - "{{ lookup('fileglob', oh_my_zsh_custom_themes | d(''), wantlist=True) }}"
+  loop: "{{ oh_my_zsh_users | product(query('fileglob', oh_my_zsh_custom_themes | d(''))) | list }}"
   when: oh_my_zsh_custom_themes is defined
   become: true
   become_user: "{{ item.0.username }}"
