@@ -70,3 +70,27 @@ def test_oh_my_zsh_custom_theme(host, username, theme):
     assert theme.is_file
     assert theme.user == username
     assert theme.group in [username, "users"]
+
+
+@pytest.mark.parametrize("username", ["test_usr1", "test_usr2"])
+def test_zsh_package_installed(host, username):
+    """Test that zsh is installed for the users."""
+    pkg = host.package("zsh")
+    assert pkg.is_installed
+
+
+@pytest.mark.parametrize("username", ["test_usr1", "test_usr2"])
+def test_user_shell_is_zsh(host, username):
+    """Test that user's shell is set to zsh."""
+    user = host.user(username)
+    assert user.shell == "/bin/zsh"
+
+
+@pytest.mark.parametrize("username", ["test_usr1", "test_usr2"])
+def test_oh_my_zsh_directory_structure(host, username):
+    """Test that oh-my-zsh directory structure exists."""
+    base_dir = f"/home/{username}/.oh-my-zsh"
+    for subdir in ["custom", "custom/themes", "custom/plugins", "lib", "tools"]:
+        d = host.file(f"{base_dir}/{subdir}")
+        assert d.exists
+        assert d.is_directory
